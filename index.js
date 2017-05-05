@@ -16,3 +16,5 @@ app.get('/greeted', function(req, res){
 	console.log('Showing greeted Names');
 	res.send('These are greeted names: ' + greetedNames);
 });
+
+
