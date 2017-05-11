@@ -1,5 +1,8 @@
 var express = require('express');
+var body_parser = require('body-parser');
 var app = express();
+app.use(express.static('public'));
+app.use(body_parser.urlencoded());
 
 var greetedNames = [];
 
@@ -7,8 +10,8 @@ app.listen(3000, function () {
 	console.log('Server running on port 3000');
 });
 
-app.get('/greetings/:name', function(req, res){
-	var name = req.params.name
+app.post('/greeting', function(req, res){
+	var name = req.body.name
 	console.log(name);
 	res.send('Hello, ' + name);
 	greetedNames.push(name);

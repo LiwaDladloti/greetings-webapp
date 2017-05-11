@@ -5,17 +5,17 @@
 		<link href = 'greet.css' rel = 'stylesheet' type = 'text/css'>
 	</head>
 <body>
-<form>
+<form action = '/greeting' method = 'post'>
 
 <h1>WELCOME TO THE GREETINGS APP</h1>
 
 <h3>Please enter your name here to be greeted</h3>
 
-<input type = 'text' placeholder = 'Enter your name here' class = 'textBox'>
+<input type = 'text' placeholder = 'Enter your name here' class = 'textBox' name = 'name'>
 <hr>
 
 
-<button class = 'greetBtn'>Greet Me!</button>
+<button class = 'greetBtn' type = 'submit'>Greet Me!</button>
 
 <div class = 'greetOutput><
 </div>
