@@ -15,7 +15,12 @@
 <hr>
 
 
-<button class = 'greetBtn' type = 'submit'>Greet Me!</button>
+
+<hr>
+
+<input type = 'radio' name = 'language' value = 'English'>
+<input type = 'radio' name = 'language' value = 'isiXhosa'>
+<input type = 'radio' name = 'language' value = 'Latin'>
 
 <div class = 'greetOutput><
 </div>

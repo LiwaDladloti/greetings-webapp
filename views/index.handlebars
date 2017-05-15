@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Greetings app</title>
+		<link href = 'greet.css' rel = 'stylesheet' type = 'text/css'>
+	</head>
+<body>
+<form action = '/' method = 'post'>
+
+<h1>WELCOME TO THE GREETINGS APP</h1>
+
+<h3>Please enter your name here to be greeted</h3>
+
+<input type = 'text' placeholder = 'Enter your name here' class = 'textBox' name = 'name'>
+<hr>
+
+<input type = 'radio' name = 'language' value = 'English'> English
+<input type = 'radio' name = 'language' value = 'isiXhosa'> isiXhosa
+<input type = 'radio' name = 'language' value = 'Latin'> Latin
+
+<hr>
+
+<button class = 'greetBtn' type = 'submit'>Greet Me!</button>
+</form>
+
+	{{msg}} {{name}}
+</body>
+    <script src = 'greet.js' type = 'text/javascript'></script>
+</html>
