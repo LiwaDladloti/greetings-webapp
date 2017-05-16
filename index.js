@@ -1,3 +1,4 @@
+'use strict'
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var body_parser = require('body-parser');
@@ -11,31 +12,50 @@ app.set('view engine', 'handlebars');
 
 var greetedNames = [];
 
+app.listen(3000, function () {
+	console.log('Server running on port 3000');
+});
 
 app.get('/', function (req, res) {
+    'use strict'
 	res.render('index');
 });
 
 app.post('/', function(req, res){
+    'use strict'
 	var name = req.body.name
 //	console.log(name);
 	greetedNames.push(name);
 	var language = req.body.language;
 //	console.log(req.body)
+    
+    var output = '';
 
 	if (language === 'English') {
-		res.render('index', {msg: 'Hello, ', name: name});
+		output = 'Hello, ' + name
 	} else if (language === 'isiXhosa') {
-		res.render('index', {msg: 'Molo, ',  name: name});
+		output = 'Molo, ' + name
 	} else if (language === 'Latin') {
-		res.render('index', {msg: 'Salve, ', name: name});
+		output = 'Salve, ' + name
 	}
+    
 
+    var uniqNames = {};
+	for(var i = 0; i < greetedNames.length; i++) {
+		var greets = greetedNames[i];
+		uniqNames[greets] = uniqNames[greets] ? uniqNames[greets] : 1;
+	}
+//    res.render('index', {counter: uniqNames[name]});
+    var counter = 0;
+    for(var key in uniqNames){
+        counter++;
+    };
+    
+    res.render('index', {greeting: output, counter: counter});
+    
 });
 
-app.listen(3000, function () {
-	console.log('Server running on port 3000');
-});
+
 
 //app.get('/greeted', function(req, res){
 //	console.log('Showing greeted Names');
