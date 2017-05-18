@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var body_parser = require('body-parser');
 var app = express();
 app.use(express.static('public'));
 
-app.use(body_parser.urlencoded({ extended: false}))
+app.use(body_parser.urlencoded({ extended: false}));
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -17,13 +17,11 @@ app.listen(3000, function () {
 });
 
 app.get('/', function (req, res) {
-    'use strict'
 	res.render('index');
 });
 
-app.post('/', function(req, res){
-    'use strict'
-	var name = req.body.name
+app.post('/', function (req, res) {
+    var name = req.body.name;
 //	console.log(name);
 	greetedNames.push(name);
 	var language = req.body.language;
@@ -32,24 +30,24 @@ app.post('/', function(req, res){
     var output = '';
 
 	if (language === 'English') {
-		output = 'Hello, ' + name
+		output = 'Hello, ' + name;
 	} else if (language === 'isiXhosa') {
-		output = 'Molo, ' + name
+		output = 'Molo, ' + name;
 	} else if (language === 'Latin') {
-		output = 'Salve, ' + name
+		output = 'Salve, ' + name;
 	}
     
 
     var uniqNames = {};
-	for(var i = 0; i < greetedNames.length; i++) {
+	for (var i = 0; i < greetedNames.length; i++) {
 		var greets = greetedNames[i];
 		uniqNames[greets] = uniqNames[greets] ? uniqNames[greets] : 1;
 	}
-//    res.render('index', {counter: uniqNames[name]});
+
     var counter = 0;
-    for(var key in uniqNames){
+    for (var key in uniqNames) {
         counter++;
-    };
+    }
     
     res.render('index', {greeting: output, counter: counter});
     
