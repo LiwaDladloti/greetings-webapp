@@ -2,7 +2,7 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var body_parser = require('body-parser');
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var app = express();
 app.use(express.static('public'));
 
@@ -11,8 +11,8 @@ app.use(body_parser.urlencoded({ extended: false}));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
-mongoose.connect(mongoURL);
+//const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+//mongoose.connect(mongoURL);
 
 var greetedNames = [];
 
