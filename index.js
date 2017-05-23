@@ -40,7 +40,6 @@ app.post('/', function (req, res) {
 	} else if (language === 'Latin') {
 		output = 'Salve, ' + name;
 	}
-    
 
     var uniqNames = {};
 	for (var i = 0; i < greetedNames.length; i++) {
