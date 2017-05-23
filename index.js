@@ -11,11 +11,8 @@ app.use(body_parser.urlencoded({ extended: false}));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-var Names = mongoose.model('Names', { name: String });
-
 const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
 mongoose.connect(mongoURL);
-
 
 var greetedNames = [];
 
