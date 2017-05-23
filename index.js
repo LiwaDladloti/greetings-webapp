@@ -2,7 +2,7 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var body_parser = require('body-parser');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var app = express();
 app.use(express.static('public'));
 
@@ -11,8 +11,12 @@ app.use(body_parser.urlencoded({ extended: false}));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+var Names = mongoose.model('Names', { name: String });
+
+const mongoURL = process.env.MONGO_DB_URL || "'mongodb://Liwa:7784liwa_dladloti@ds064299.mlab.com:64299/liwa-greetings-webapp
+'";
 mongoose.connect(mongoURL);
+
 
 var greetedNames = [];
 
