@@ -13,8 +13,7 @@ app.set('view engine', 'handlebars');
 
 var Names = mongoose.model('Names', { name: String });
 
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://Liwa:7784liwa_dladloti@ds064299.mlab.com:64299/liwa-greetings-webapp
-'";
+const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
 mongoose.connect(mongoURL);
 
 
