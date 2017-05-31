@@ -2,7 +2,7 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var body_parser = require('body-parser');
-//var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var app = express();
 app.use(express.static('public'));
 
@@ -11,8 +11,22 @@ app.use(body_parser.urlencoded({ extended: false}));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-//const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
-//mongoose.connect(mongoURL);
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://greets:greets@ds064299.mlab.com:64299/liwa-greetings-webapp";
+mongoose.connect(mongoURL);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+console.log('We are connected');
+});
+
+var testSchema = mongoose.Schema({
+    name: String,
+    counter: Number
+});
+
+var newName = mongoose.model('test', testSchema);
 
 var greetedNames = [];
 
@@ -25,21 +39,22 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-    var name = req.body.name;
-//	console.log(name);
-	greetedNames.push(name);
+    var greetName = req.body.name;
+//	console.log(greetName);
+	greetedNames.push(greetName);
 	var language = req.body.language;
 //	console.log(req.body)
     
     var output = '';
 
 	if (language === 'English') {
-		output = 'Hello, ' + name;
+		output = 'Hello, ' + greetName;
 	} else if (language === 'isiXhosa') {
-		output = 'Molo, ' + name;
+		output = 'Molo, ' + greetName;
 	} else if (language === 'Latin') {
-		output = 'Salve, ' + name;
+		output = 'Salve, ' + greetName;
 	}
+    
 
     var uniqNames = {};
 	for (var i = 0; i < greetedNames.length; i++) {
@@ -54,13 +69,28 @@ app.post('/', function (req, res) {
     
     res.render('index', {greeting: output, counter: counter});
     
+//    newName.create({name: greetName, counter: 1});
+    
+    newName.findOne({name: greetName}, function(err, firstName) {
+        if(err) {
+            return done(err)
+        }
+        if(firstName) {
+            firstName.counter = firstName.counter + 1;
+            firstName.save();
+        } 
+        if(!firstName) {
+            newName.create({name: greetName, counter: 1});
+        }
+    });
+    
 });
 
 
 
 //app.get('/greeted', function(req, res){
 //	console.log('Showing greeted Names');
-//	res.send('These are greeted names: ' + greetedNames);
+//	res.send('These are greeted greetNames: ' + greetedNames);
 //});
 //
 //app.get('/counter/:user', function (req, res) {
