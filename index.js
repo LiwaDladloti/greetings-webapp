@@ -77,13 +77,12 @@ app.post('/', function (req, res) {
         }
         if(firstName) {
             firstName.counter = firstName.counter + 1;
-            firstName.save();
+            firstName.save();   
         } 
         if(!firstName) {
             newName.create({name: greetName, counter: 1});
         }
     });
-    
 });
 
 
